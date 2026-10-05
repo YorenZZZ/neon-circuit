@@ -19,7 +19,9 @@ trap 'rm -rf "$task_stage"' EXIT
 mkdir -p "$task_root/dist"
 /usr/bin/ditto --norsrc "$task_app" "$task_stage/NEON Circuit.app"
 cp "$task_root/README.md" "$task_root/README.en.md" "$task_root/LICENSE" "$task_stage/"
-cp -R "$task_root/docs" "$task_stage/docs"
+# Reuse the complete manual embedded in the app instead of storing every
+# illustration twice inside the disk image. Relative README links still work.
+ln -s 'NEON Circuit.app/Contents/Resources/docs' "$task_stage/docs"
 ln -s /Applications "$task_stage/Applications"
 if [[ "$task_kind" == preview ]]; then
   printf 'Preview: ad hoc signature only; no Developer ID or Apple notarization.\n' > "$task_stage/PREVIEW-NOT-NOTARIZED.txt"
