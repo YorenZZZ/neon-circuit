@@ -1,0 +1,9 @@
+.DS_Store
+/build/
+/dist/
+/.cache/
+*.p12
+*.mobileprovision
+*.key
+original*.cape
+last-operation.json
